@@ -1,0 +1,91 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}Contect{% endblock title %}
+<!-- style section ...............-->
+{% block styles %}
+
+<style>
+    .text-custom:hover {
+      color: orange;
+    }
+    .bord:hover{
+        border:2px solid rgb(50, 124, 189);
+    }
+    .borcontact{
+        border: 1px solid rgb(105, 105, 105);
+        padding: 40px 20px 40px 20px;
+    }
+    
+  </style>
+{% endblock styles %}
+
+<!-- Hero Section..................... -->
+{% block herosection %}
+ <section id="hero" class="hero section dark-background">
+
+    <img src="{% static  'assets/img/services.jpg' %}" alt="" data-aos="fade-in">
+
+    <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h2>Welcome to Apna Store <strong class="text-custom"><br> Contect </strong></h2>
+                <p>You Can easy to contact With Apna Store</p>
+                <a href="" class="btn-get-started">Contact Now</a>
+            </div>
+        </div>
+    </div>
+
+</section><!-- /Hero Section -->
+{% endblock herosection %}
+
+
+
+
+{% block body %}
+<h1 class=" text-center">Contact Us</h1><br>
+<div class="container mt-2"> 
+    
+    <div class="row">
+        <div class="col-md-4">4</div>
+        <div class="col-md-4 borcontact">
+            {% for message in messages %}
+            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert" id="myAlert">
+                <strong>{{message}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-lable="Close"></button>
+            </div>
+            {% endfor %}
+            <h3 class="text-center mb-4 text-custom ">Contact Here</h3>
+            
+            <form action="{% url 'contact' %}" method="post">
+                {% csrf_token %}
+                <!-- Name Field -->
+                <div class="mb-3">
+                    <label for="name" class="form-label text-custom">Full Name</label>
+                    <input type="text" class="form-control bord" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+                <!-- Email Field -->
+                <div class="mb-3">
+                    <label for="email" class="form-label text-custom">Email </label>
+                     <input type="email" class="form-control bord" id="email" name="email"  value="{{user.email}}" placeholder="Enter your email" required> <!--ydi login hoke yha hai to uski id yha auto metic aa jayegi> -->
+                </div>
+                <!-- Password Field -->
+                <div class="mb-3">
+                    <label for="desc" class="form-label text-custom">How Can i Help You</label>
+                    <textarea type="text" class="form-control bord" id="desc" name="desc" placeholder="Write Note here" required></textarea>
+                </div>
+                <!-- Confirm Password Field -->
+                <div class="mb-3">
+                    <label for="Pnumber" class="form-label text-custom ">Phone Number</label>
+                    <input type="number" class="form-control bord" id="pnumber" name="pnumber" placeholder="Enter Phone number" required>
+                </div>
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary w-100 ">Submit</button><br>
+            </form>
+        </div>
+        
+        
+    </div>
+    <div class="col-md-4">12</div>
+</div>
+
+{% endblock body %}
