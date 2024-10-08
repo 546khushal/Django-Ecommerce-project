@@ -14,7 +14,9 @@
     <meta name="amazon,flipkart,selling,products,mitra" content="ecommerce">
 
     <!-- Favicons -->
-    <link href="{% static  'assets/img/favicon.png' %}" rel="icon">
+    
+    <link href="{% static 'assets/img/log.png' %}" rel="icon" type="image/png">
+   
     <link href="{% static  'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
     <!-- Fonts -->
@@ -52,40 +54,39 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="/" class="nav-link scrollto active">Home</a></li>
-                    <li><a href="/about" class="nav-link scrollto">About</a></li>
-                    <li><a href="/blog" class="nav-link scrollto">Blog</a></li>
-                    <li><a href="/checkout" class="nav-link scrollto">CheckOut</a></li>
-                    <li><a href="/myprofile" class="nav-link scrollto">My Profile</a></li>
-
-                    <button type="button" class="nav-link scrollto bg-danger p-3 m-2 text-white" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" ><i class="fa-solid fa-cart-shopping"></i>  Cart (<span id="cart">{{request.user.profile.get_cart_count}}</span>)
-                    </button>
-
-
-
+                    <li><a href="/" class="nav-link scrollto {% if request.path == '/' %}active{% endif %}">Home</a></li>
+                    <li><a href="/about" class="nav-link scrollto {% if request.path == '/about/' %}active{% endif %}">About</a></li>
+                    <li><a href="/blog" class="nav-link scrollto {% if request.path == '/blog/' %}active{% endif %}">Blog</a></li>
+                    <li><a href="/checkout" class="nav-link scrollto {% if request.path == '/checkout/' %}active{% endif %}">CheckOut</a></li>
+                    <li><a href="/myprofile" class="nav-link scrollto {% if request.path == '/myprofile/' %}active{% endif %}">My Profile</a></li>
+                    
                     {% if request.user.is_authenticated %}
-                    <!-- <li><a class="nav-link scrollto " href="/accounts/logout/">Logout {{user.username}}</a></li>     yhha logout button ke sath user ki id bhi dekhegi -->
+                    <a href="{% url 'cart' %}">
+                    <button type="button" class="nav-link scrollto bg-danger p-3 m-2 text-white" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true">
+                        <i class="fa-solid fa-cart-shopping"></i> Cart <span id="cart">{{ cart_count }}</span>
+                    </button>
+                    </a>
+                    {% endif %}
+            
+                    {% if request.user.is_authenticated %}
                     <li><a class="nav-link scrollto " href="/accounts/logout/">Logout</a></li>
                     {% else %}
-
-                    <li class="dropdown"><a href="#"><span>Dropdown</span> 
-                        <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                     <ul>
-                     <li><a href="/accounts/sign/">SignIn</a></li>
-                     <li><a href="/accounts/login/">LogIn</a></li>
-                     
-                     </ul>
+                    <li class="dropdown">
+                        <a href="#"><span>Dropdown</span> 
+                            <i class="bi bi-chevron-down toggle-dropdown"></i>
+                        </a>
+                        <ul>
+                            <li><a href="/accounts/sign/">SignIn</a></li>
+                            <li><a href="/accounts/login/">LogIn</a></li>
+                        </ul>
                     </li>
-
                     {% endif %}
-
-                    
-                    
-                    <li><a class="nav-link scrollto bg-success p-2 m-2" href="/contact">Contact</a></li>
-                    
+            
+                    <li><a class="nav-link scrollto bg-success p-2 m-2 {% if request.path == '/contact' %}active{% endif %}" href="/contact">Contact</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
+            
 
         </div>
     </header>

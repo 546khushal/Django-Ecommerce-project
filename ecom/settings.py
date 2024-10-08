@@ -67,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'ecom.context_processors.cart_count',  #cart count ko base.html pr bta dega sidha bahr hi
             ],
         },
     },
@@ -145,3 +146,8 @@ MEDIA_URL ='/media/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+RAZORPAY_KEY ='rzp_test_6dVgEpUWWfu5yK'
+RAZORPAY_SECRET = 'sOb1r6KUYlIziHW6DbYCIqgQ'
+

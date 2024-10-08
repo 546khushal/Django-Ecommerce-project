@@ -1,35 +1,59 @@
 {% extends "base/base.html"%}
+{% block style %}
+<style>
+.figure-img {
+    height: 400px; /* Adjust this value as needed */
+}
+
+.thumbs-wrap {
+    height: 100px; /* Adjust this value as needed */
+}
+
+.figure-img img {
+    max-height: 100%;
+    object-fit: cover; /* This ensures the image covers the div without stretching */
+}
+</style>
+{% endblock style%}
 
 {%  block body %}
 
-<section class="section-content padding-y bg text-bg-secondary ">
-    <div class="container mt-lg-5 p-5">
+<section class="section-content padding-y bg text-bg-secondary "  >
+    <div class="container-xxl mt-lg-5 p-5">
     
     <!-- ============================ COMPONENT 1 ================================= -->
     <div class="card p-5">
         <div class="row no-gutters">
-            <aside class="col-md-6">
-    <article class="gallery-wrap"> 
-        <div class="img-big-wrap">
-            <div>
-              <center>
-                <a href="#">
-                  <img src="/media/{{product.product_images.first.images}}" class="img-fluid" alt="{{ product.product_name }}">
-                </a>
-              </center>
-            </div>
-          </div>
-          
-    <div class="thumbs-wrap p-2 ml-5 ">
-      <center>{% for image in product.product_images.all %}
-      <a href="#" class="item-thumb"> <img src="{{ image.images.url }}" height="50px" width="50px"></a>
-      
-      {% endfor %}
-      </center>
-
-    </div> <!-- slider-nav.// -->
-    </article> <!-- gallery-wrap .end// -->
+            <aside class="col-12 col-md-6">
+                <article class="gallery-wrap d-flex flex-column h-100">
+                    <!-- Image container with an increased height -->
+                    <div class="figure-img border rounded-4 mb-3 flex-grow-1  bg-secondary" style="min-height: 300px; --bs-bg-opacity: .3;">
+                        <div class="d-flex justify-content-center align-items-center w-100 h-100">
+                            <a href="#">
+                                <img  id="mainImage" src="/media/{{ product.product_images.first.images }}" 
+                                     class="img-fluid rounded-4 p-1 w-100 h-100" 
+                                     style="object-fit: cover; " 
+                                     alt="{{ product.product_name }}">
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Thumbnails section positioned at the bottom -->
+                    <div class="thumbs-wrap p-2 d-flex justify-content-center flex-wrap">
+                        {% for image in product.product_images.all %}
+                            <div class="item-thumb bg-secondary border m-1" style="--bs-bg-opacity: .3;">
+                                <a href="#">
+                                    <img src="{{ image.images.url }}" class="img-fluid p-2 thumbnail" style="max-height: 60px; max-width: 60px;">
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </article>
             </aside>
+            
+            
+
+            
             <main class="col-md-6 border-left">
     <article class="content-body">
     
@@ -51,7 +75,7 @@
         <span class="text-muted">/</span> 
     </div> <!-- price-detail-wrap .// -->
     
-    <p>{{product.product_desription}}</p>
+   
     
     
     <dl class="row">
@@ -74,7 +98,10 @@
         <dd class="col-sm-9">ALL Country</dd>
     </dl>
     
-    
+    <hr>
+    <h5>Product Details</h5>
+    <p >{{ product.product_description}}</p> 
+                   
     <hr>
         <div class="form-row">
             <div class="form-group col-md flex-grow-0">
@@ -90,20 +117,20 @@
                 </div>
             </div> <!-- col.// -->
             {% if product.size_variant.count %}
-        <div class="form-group col-md">
-            <label>Select size</label>
-            <div class="mt-1">
-                {% for size in product.size_variant.all %}
-                <label class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" onchange="get_correct_price('{{ size.size_name }}')" name="select_size" value="{{ size.size_name }}"
-                        {% if select_size == size.size_name %} checked {% endif %}
-                        class="custom-control-input">
-                    <div class="custom-control-label">{{ size.size_name }}</div>
-                </label>
-                {% endfor %}
+            <div class="form-group col-md">
+                <label>Select size</label>
+                <div class="mt-1">
+                    {% for size in product.size_variant.all %}
+                        <label class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" onchange="get_correct_price('{{ size.size_name }}')" name="select_size" value="{{ size.size_name }}"
+                                {% if selected_size == size.size_name %} checked {% endif %}
+                                class="custom-control-input">
+                            <div class="custom-control-label">{{ size.size_name }}</div>
+                        </label>
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-        {% endif %}
+             {% endif %}
 
             <!-- col.// -->
         </div> <!-- row.// -->
@@ -126,6 +153,8 @@
 
     }
     </script>
+
+        
 
 
 {% endblock body %}

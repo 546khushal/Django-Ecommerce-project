@@ -2,6 +2,7 @@ from django.db import models
 from base.models import BaseModels
 from django.utils.text import slugify
 
+
 # Create your models here.
 class Category(BaseModels):
     category_name =models.CharField(max_length=100)
@@ -55,3 +56,9 @@ class Product(BaseModels):
 class ProductImages(BaseModels):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_images")
     images =models.ImageField(upload_to="products")
+
+class Coupon(BaseModels):
+    Coupon_code = models.CharField(max_length=10)
+    is_expired = models.BooleanField(default=False)
+    discount_price =models.IntegerField(default=100)
+    minimum_amount = models.IntegerField(default=500)

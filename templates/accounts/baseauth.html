@@ -30,6 +30,7 @@
     <link href="{% static  'assets/vendor/aos/aos.css' %}" rel="stylesheet">
     <link href="{% static  'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
     <link href="{% static  'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+   
 
     <!-- Main CSS File -->
     <link href="{% static 'assets/css/main.css'  %}" rel="stylesheet">
@@ -101,6 +102,10 @@
 
 
                         {% endblock content %}
+
+                        
+                        {% block cart %}
+                        {% endblock cart %}
                         
                         {% block bodyform %}
 

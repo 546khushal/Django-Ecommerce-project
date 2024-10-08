@@ -58,18 +58,24 @@
     <div class="container ">
         <div class="row">
             {% for product in product_list %}
-            <div class="col-md-3 mt-3 border rounded p-3">
+            <div class="col-md-3 mt-3 border rounded-4 p-3">
                 <!-- Display the first image -->
                 {% if product.product_images.first %}
-                    <img src="{{ product.product_images.first.images.url }}" class="card-img-top  p-1" alt="Image not found" height="200px" width="90px">
+                    <img src="{{ product.product_images.first.images.url }}" class="card-img-top rounded-4 bg-secondary  p-1"  style="--bs-bg-opacity: .2;" alt="Image not found" height="230px" width="80px">
                 {% else %}
                     <img src="{% static 'path/to/default/image.jpg' %}" class="card-img-top p-1" alt="No image available" height="200px" width="90px">
                 {% endif %}
                 
                 <div class="card-body">
-                    <a href="{% url 'get_product' product.slug %}"><h5 class="card-title mt-3" id="namepr{{ product.id }}">{{ product.product_name }}</h5></a>
-                    
-                    <p class="card-text">{{ product.product_description|slice:":50" }}...</p>
+                    <a href="{% url 'get_product' product.slug %}"><h5 class="card-title mt-3 text-black" id="namepr{{ product.id }}">{{ product.product_name }}</h5></a>
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    {% comment %} <p class="card-text">{{ product.product_description|slice:":50" }}...</p> {% endcomment %}
                     <h6 class="card-title mb-3">Price: <span id="pricepr{{ product.id }}">{{ product.price }}</span></h6>
                     <span id="divpe{{ product.id }}" class="divpr">
                         <button id="pr{{ product.id }}" class="btn btn-success btn-sm mt-0">Add to Cart</button>
@@ -87,7 +93,10 @@
             {% endfor %}
         </div>
     </div>
+
 {% endfor %}
+
+
 
 
 

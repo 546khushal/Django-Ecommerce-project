@@ -1,13 +1,74 @@
 {% extends "base/base.html" %}
+{% load static %}
 {% block title %} About {% endblock title %}
-
+{%block style %}
+<style>
+    #brand-story {
+        padding: 60px 0;
+        background: #f8f9fa;
+    }
+    .team-member {
+        text-align: center;
+        margin: 20px 0;
+    }
+    .team-member img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+    }
+    #testimonials blockquote {
+        border-left: 4px solid #007bff;
+        padding-left: 20px;
+        margin: 20px 0;
+    }
+</style>
+{% endblock style %}
 {% block body %}
 <div class="card">
-    <br>
-    <br>
-    <h2>about</h2>
-    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem iure omnis aspernatur veritatis odio maiores accusamus nisi fugiat non hic praesentium tempore dolorem odit commodi saepe dolore, quod sint alias!</p>
-
+   <img src="{% static 'assets\img\aboutimg.jpg' %}" height="400px" width="100%">
 </div>
+<main class="container">
+    <section id="brand-story" class="text-center">
+        <h1 class="display-4">About Us</h1>
+        <p class="lead">Welcome to <strong>APNA STORE</strong>! Our journey started with [brief history or inspiration]. We are dedicated to [mission statement].</p>
+    </section>
+
+    <section id="company-overview" class="my-5">
+        <h2 class="display-5">Our Company</h2>
+        <p>[Brief company history]</p>
+        <h3 class="mt-4">Meet the Team</h3>
+        <div class="row">
+            <!-- Team member profiles -->
+            <div class="col-md-4 text-center team-member">
+                <img src="{% static 'assets\img\team\own.jpg' %}" alt="Team Member 1" class="img-fluid rounded-circle">
+                <h4>Khushal Suthar</h4>
+                <p>Founder Of APNA STORE.</p>
+            </div>
+            <!-- Repeat for other team members -->
+        </div>
+        <p class="mt-4">Our office is located at Ahemdabad[GJ] .</p>
+    </section>
+
+    <section id="products-services" class="bg-light py-5">
+        <h2 class="display-5 text-center">What We Offer</h2>
+        <p>[Description of products/services]</p>
+        <h3 class="mt-4">Our Commitment to Sustainability</h3>
+        <p>[Details about sustainability practices]</p>
+    </section>
+
+    <section id="testimonials" class="my-5">
+        <h2 class="display-5 text-center">What Our Customers Say</h2>
+        <blockquote class="blockquote text-center">
+            <p class="mb-0">"[Customer testimonial]"</p>
+            <footer class="blockquote-footer">- Customer Name</footer>
+        </blockquote>
+        <!-- Repeat for more testimonials -->
+    </section>
+
+    <section id="contact" class="text-center">
+        <h2 class="display-5">Get in Touch</h2>
+        <p>If you have any questions or need support, feel free to <a href="khushalsutharksp@gmail.com" class="btn btn-primary">email us</a> or follow us on <a href="https://socialmedia.com/yourbrand" class="btn btn-info">social media</a>.</p>
+    </section>
+</main>
 
 {% endblock body %}

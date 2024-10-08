@@ -1,8 +1,9 @@
 from django.contrib import admin
 from base.models import BaseModels
-from products.models import Category,Product,ProductImages,ColorVariant,SizeVariant
+from products.models import Category,Product,ProductImages,ColorVariant,SizeVariant,Coupon
 # Register your models here.
 admin.site.register(Category)
+admin.site.register(Coupon)
 
 
 class ProductImagesAdmin(admin.StackedInline):
